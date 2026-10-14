@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eric Eli Solsol Fasabi | Portfolio & CV</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: { cyber: { dark: '#050811' } },
+    fontFamily: { sans: ['Inter','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+    boxShadow: { 'neon-glow': '0 0 20px rgba(16,185,129,.35)', 'card-cyber': '0 8px 32px rgba(0,0,0,.37)' }
+  } }
+}
+</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="relative min-h-screen text-slate-200 selection:bg-emerald-500 selection:text-black">
+
+<canvas id="cyberCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+<div class="fixed inset-0 scanline-overlay z-0"></div>
+
+<!-- HEADER -->
+<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-cyber-dark/80 border-b border-emerald-500/20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 rounded-lg bg-emerald-950/80 border border-emerald-500/40 flex items-center justify-center group-hover:shadow-neon-glow transition-all">
+        <i class="fa-solid fa-terminal text-emerald-400"></i>
+      </div>
+      <div>
+        <span class="font-mono text-lg font-bold text-white tracking-wider">ERIC<span class="text-emerald-400">.SOLSOL</span></span>
+        <span class="block text-[10px] text-emerald-500/80 font-mono tracking-widest uppercase">CyberSec & Systems</span>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center space-x-1 font-mono text-sm">
+      <a href="#about" class="nav-link">/Inicio</a>
+      <a href="#education" class="nav-link">/Educación</a>
+      <a href="#certs" class="nav-link">/Certificaciones</a>
+      <a href="#skills" class="nav-link">/Skills</a>
+      <a href="#proyectos" class="nav-link">/Proyectos</a>
+      <a href="#contact" class="nav-link">/Contacto</a>
+    </nav>
+    <div class="hidden sm:flex items-center gap-3">
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/50 border border-emerald-500/30 font-mono text-xs text-emerald-400">
+        <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span>
+        <span>Disponible para prácticas</span>
+      </div>
+      <button id="soundToggleBtn" onclick="toggleAudio()" class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 transition-all" title="Efectos de sonido" aria-label="Activar o desactivar sonido">
+        <i id="soundIcon" class="fa-solid fa-volume-xmark"></i>
+      </button>
+    </div>
+    <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400" aria-label="Abrir menú">
+      <i class="fa-solid fa-bars text-xl"></i>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden bg-cyber-dark/95 border-b border-emerald-500/30 px-4 pt-2 pb-6 space-y-2 font-mono text-sm">
+    <a href="#about" onclick="toggleMobileMenu()" class="nav-link block">/Inicio</a>
+    <a href="#education" onclick="toggleMobileMenu()" class="nav-link block">/Educación</a>
+    <a href="#certs" onclick="toggleMobileMenu()" class="nav-link block">/Certificaciones</a>
+    <a href="#skills" onclick="toggleMobileMenu()" class="nav-link block">/Skills</a>
+    <a href="#proyectos" onclick="toggleMobileMenu()" class="nav-link block">/Proyectos</a>
+    <a href="#contact" onclick="toggleMobileMenu()" class="nav-link block">/Contacto</a>
+  </div>
+</header>
+
+<main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-28">
+
+<!-- HERO -->
+<section id="about" class="pt-8 sm:pt-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+  <div class="lg:col-span-7 space-y-6">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/30 border border-emerald-500/30 font-mono text-xs text-emerald-300">
+      <i class="fa-solid fa-shield-halved text-emerald-400"></i><span>Ciberseguridad & Ingeniería de Sistemas</span>
+    </div>
+    <div class="space-y-3">
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-none">Eric Eli <br><span class="gradient-text">Solsol Fasabi</span></h1>
+      <p class="text-lg sm:text-xl text-slate-300 font-mono flex items-center gap-2">
+        <span class="text-emerald-400">></span><span id="typedTitle" class="terminal-cursor">Estudiante de Ingeniería de Sistemas e Informática</span>
+      </p>
+    </div>
+    <p class="text-slate-400 leading-relaxed max-w-2xl">
+      Apasionado por la seguridad informática, la administración de sistemas Linux/Cisco, auditoría de vulnerabilidades y la creación de soluciones tecnológicas. En constante aprendizaje de redes, virtualización y automatización.
+    </p>
+    <div class="flex flex-wrap items-center gap-4 text-sm font-mono text-slate-300">
+      <div class="flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800"><i class="fa-solid fa-location-dot text-emerald-400"></i><span>Callao / Lima, Perú</span></div>
+      <div class="flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800"><i class="fa-solid fa-graduation-cap text-emerald-400"></i><span>UTP & SENATI</span></div>
+    </div>
+    <div class="flex flex-wrap items-center gap-4 pt-4">
+      <a href="#contact" class="px-6 py-3.5 rounded-xl bg-emerald-500 text-slate-950 font-bold font-mono hover:bg-emerald-400 hover:shadow-neon-glow transition-all flex items-center gap-2"><i class="fa-solid fa-paper-plane"></i><span>Contactar Ahora</span></a>
+      <button onclick="openCVModal()" class="px-6 py-3.5 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-400 font-mono font-semibold hover:bg-emerald-950/40 hover:border-emerald-400 transition-all flex items-center gap-2"><i class="fa-solid fa-file-pdf"></i><span>Ver CV Profesional</span></button>
+      <a href="https://github.com/ericsolsol" target="_blank" rel="noopener" class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 transition-all" title="GitHub" aria-label="GitHub"><i class="fa-brands fa-github text-xl"></i></a>
+      <a href="https://www.linkedin.com/in/eric-solsol" target="_blank" rel="noopener" class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 transition-all" title="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin text-xl"></i></a>
+    </div>
+    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800/80 max-w-xl">
+      <div><span class="text-2xl sm:text-3xl font-extrabold font-mono text-emerald-400">100%</span><p class="text-xs text-slate-400 uppercase font-mono">Compromiso</p></div>
+      <div><span class="text-2xl sm:text-3xl font-extrabold font-mono text-emerald-400">8</span><p class="text-xs text-slate-400 uppercase font-mono">Certificaciones</p></div>
+      <div><span class="text-2xl sm:text-3xl font-extrabold font-mono text-emerald-400">+10</span><p class="text-xs text-slate-400 uppercase font-mono">Habilidades</p></div>
+    </div>
+  </div>
+
+  <div class="lg:col-span-5">
+    <div class="glass-panel shadow-card-cyber border border-emerald-500/30 overflow-hidden">
+      <div class="bg-slate-950 px-4 py-3 border-b border-emerald-500/20 flex items-center justify-between">
+        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-red-500/80"></span><span class="w-3 h-3 rounded-full bg-yellow-500/80"></span><span class="w-3 h-3 rounded-full bg-emerald-500/80"></span></div>
+        <span class="font-mono text-xs text-slate-400">bash - eric@security-node:~</span>
+        <i class="fa-solid fa-lock text-xs text-emerald-500/60"></i>
+      </div>
+      <div class="p-5 font-mono text-xs sm:text-sm space-y-4 text-slate-300 bg-slate-950/90 h-96 overflow-y-auto" id="terminalOutput">
+        <p class="text-emerald-400 font-bold"># Bienvenido a la consola interactiva de Eric Solsol</p>
+        <p class="text-slate-400">Escribe <span class="text-yellow-400 font-bold">'help'</span> para ver los comandos disponibles.</p>
+        <div class="pt-2"><span class="text-emerald-400">eric@solsol:~$</span> <span class="text-white">whoami</span>
+          <p class="text-slate-300 mt-1 pl-4 border-l-2 border-emerald-500/40">Eric Eli Solsol Fasabi | Estudiante de Ingeniería de Sistemas e Informática</p></div>
+        <div><span class="text-emerald-400">eric@solsol:~$</span> <span class="text-white">cat status.txt</span>
+          <p class="text-emerald-300 mt-1 pl-4 border-l-2 border-emerald-500/40">[OK] Sistemas operativos: Linux Kali, Windows Server<br>[OK] Enfoque: Ciberseguridad, Redes Cisco & Automatización con Python</p></div>
+      </div>
+      <form onsubmit="handleTerminalSubmit(event)" class="bg-slate-950 border-t border-slate-800 p-3 flex items-center gap-2 font-mono text-xs sm:text-sm">
+        <span class="text-emerald-400 font-bold">eric@solsol:~$</span>
+        <input type="text" id="terminalInput" class="flex-1 bg-transparent text-white focus:outline-none placeholder-slate-600" placeholder="Escribe un comando... (ej: help, certs, skills, cv)" autocomplete="off" aria-label="Comando">
+        <button type="submit" class="text-xs text-emerald-400 hover:text-emerald-300 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-500/30">Ejecutar</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCACIÓN -->
+<section id="education" class="space-y-8">
+  <div class="flex items-center gap-4">
+    <div class="sec-icon"><i class="fa-solid fa-graduation-cap text-xl"></i></div>
+    <div><h2 class="text-2xl sm:text-3xl font-bold text-white font-mono">/Educación & Formación</h2>
+    <p class="text-slate-400 text-sm">Trayectoria académica universitaria y técnica</p></div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="glass-panel p-6 space-y-4 border-l-4 border-l-emerald-500">
+      <div class="flex items-start justify-between gap-4">
+        <div class="space-y-1">
+          <span class="inline-block px-3 py-1 rounded bg-emerald-950 text-emerald-400 font-mono text-xs font-semibold border border-emerald-500/30">En Curso | Pregrado</span>
+          <h3 class="text-xl font-bold text-white">Universidad Tecnológica del Perú (UTP)</h3>
+          <p class="text-emerald-400 font-mono text-sm">Ingeniería de Sistemas e Informática</p>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0 text-emerald-400"><i class="fa-solid fa-university text-2xl"></i></div>
+      </div>
+      <p class="text-slate-300 text-sm leading-relaxed">Formación en diseño de software, gestión de infraestructura tecnológica, bases de datos, análisis de algoritmos y arquitectura de redes empresariales.</p>
+      <div class="pt-2 border-t border-slate-800/80 flex flex-wrap gap-2"><span class="chip">Estructura de Datos</span><span class="chip">Redes IP</span><span class="chip">Ingeniería de SW</span></div>
+    </div>
+    <div class="glass-panel p-6 space-y-4 border-l-4 border-l-blue-500">
+      <div class="flex items-start justify-between gap-4">
+        <div class="space-y-1">
+          <span class="inline-block px-3 py-1 rounded bg-blue-950 text-blue-400 font-mono text-xs font-semibold border border-blue-500/30">Formación Técnica</span>
+          <h3 class="text-xl font-bold text-white">SENATI</h3>
+          <p class="text-blue-400 font-mono text-sm">Ciberseguridad & Administración de Redes</p>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0 text-blue-400"><i class="fa-solid fa-server text-2xl"></i></div>
+      </div>
+      <p class="text-slate-300 text-sm leading-relaxed">Formación práctica en redes Cisco, análisis de tráfico, buenas prácticas de defensa cibernética y administración de entornos Linux.</p>
+      <div class="pt-2 border-t border-slate-800/80 flex flex-wrap gap-2"><span class="chip">Cisco Networking</span><span class="chip">Ciberseguridad</span><span class="chip">Linux</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICACIONES -->
+<section id="certs" class="space-y-8">
+  <div class="flex items-center gap-4">
+    <div class="sec-icon"><i class="fa-solid fa-award text-xl"></i></div>
+    <div><h2 class="text-2xl sm:text-3xl font-bold text-white font-mono">/Certificaciones</h2>
+    <p class="text-slate-400 text-sm">Certificados emitidos por Cisco Networking Academy</p></div>
+  </div>
+  <div id="certsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="space-y-8">
+  <div class="flex items-center justify-between flex-wrap gap-4">
+    <div class="flex items-center gap-4">
+      <div class="sec-icon"><i class="fa-solid fa-code text-xl"></i></div>
+      <div><h2 class="text-2xl sm:text-3xl font-bold text-white font-mono">/Habilidades & Stack</h2>
+      <p class="text-slate-400 text-sm">Herramientas, lenguajes y entornos de trabajo</p></div>
+    </div>
+    <div class="flex items-center gap-2 bg-slate-950 p-1.5 rounded-xl border border-slate-800 font-mono text-xs overflow-x-auto">
+      <button onclick="filterSkills('all',this)" class="skill-tab on">Todos</button>
+      <button onclick="filterSkills('cyber',this)" class="skill-tab">Ciberseguridad & Redes</button>
+      <button onclick="filterSkills('os',this)" class="skill-tab">Virtualización & SO</button>
+      <button onclick="filterSkills('prog',this)" class="skill-tab">Programación & Software</button>
+    </div>
+  </div>
+  <div id="skillsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+</section>
+
+<!-- PROYECTOS & LABORATORIOS -->
+<section id="proyectos" class="space-y-8">
+  <div class="flex items-center gap-4">
+    <div class="sec-icon"><i class="fa-solid fa-diagram-project text-xl text-emerald-400"></i></div>
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-bold text-white font-mono">/Proyectos & Laboratorios</h2>
+      <p class="text-slate-400 text-sm">Infraestructuras de red simuladas y soluciones prácticas de TI</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6">
+    <!-- PROYECTO 1 -->
+    <div class="glass-panel p-6 sm:p-8 space-y-6 border-l-4 border-l-emerald-500 rounded-xl relative overflow-hidden group">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <span class="px-3 py-1 text-xs font-mono font-semibold text-emerald-400 bg-emerald-950/80 border border-emerald-500/30 rounded-full">
+          Infraestructura & Redes
+        </span>
+        <span class="text-xs text-slate-400 font-mono">Cisco Packet Tracer / GNS3</span>
+      </div>
+
+      <div>
+        <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-3">
+          Conectividad Redundante y Servicios Virtualizados Regionales
+        </h3>
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+          Diseño e implementación de una topología empresarial multi-sede que interconecta tres sedes regionales
+          <strong class="text-emerald-400 font-normal">(Lima, Ica y Arequipa)</strong> asegurando alta disponibilidad,
+          enrutamiento dinámico OSPF y servicios centralizados.
+        </p>
+      </div>
+
+      <ul class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm text-slate-300 font-mono bg-slate-950/50 p-4 rounded-lg border border-slate-800">
+        <li class="flex items-start gap-2">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>Enrutamiento dinámico OSPF (v2/v3) y rutas de respaldo estáticas.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>Redundancia L2 con Spanning Tree (STP) y EtherChannel (LACP).</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>Servidores virtualizados integrados: DNS, Web y DHCP dinámico.</span>
+        </li>
+      </ul>
+
+      <div class="flex flex-wrap gap-2">
+        <span class="chip">OSPF</span>
+        <span class="chip">VLANs</span>
+        <span class="chip">EtherChannel</span>
+        <span class="chip">IPv4 / IPv6</span>
+        <span class="chip">VMware</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-800">
+        <button onclick="openProjectModal('proyecto1')" class="py-2.5 px-5 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-semibold text-xs sm:text-sm rounded-lg transition-colors flex items-center justify-center gap-2 font-mono border border-emerald-500/30">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+          </svg>
+          Ver Diagrama & Topología
+        </button>
+
+        <a href="./downloads/Conectividad_redundante_servicios.pkt" download="Conectividad_redundante_servicios.pkt" class="py-2.5 px-5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold font-mono text-xs sm:text-sm rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-lg shadow-emerald-500/20">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          Descargar Laboratorio (.PKT)
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contact" class="space-y-8">
+  <div class="flex items-center gap-4">
+    <div class="sec-icon"><i class="fa-solid fa-address-book text-xl"></i></div>
+    <div><h2 class="text-2xl sm:text-3xl font-bold text-white font-mono">/Curriculum Vitae & Contacto</h2>
+    <p class="text-slate-400 text-sm">Hablemos sobre oportunidades laborales o colaboración</p></div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div class="lg:col-span-5 space-y-6 glass-panel p-6">
+      <h3 class="text-xl font-bold text-white">Información de Contacto</h3>
+      <div class="space-y-4">
+        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 overflow-hidden">
+            <i class="fa-solid fa-envelope text-emerald-400 text-lg"></i>
+            <div class="truncate"><span class="text-xs text-slate-400 block font-mono">Correo Electrónico</span>
+            <span id="myEmailText" class="text-sm text-white font-mono font-medium truncate">solsolfasabierick@gmail.com</span></div>
+          </div>
+          <button onclick="copyEmail()" class="p-2.5 rounded-lg bg-emerald-950 text-emerald-400 hover:bg-emerald-500 hover:text-black transition-all shrink-0" title="Copiar correo" aria-label="Copiar correo"><i class="fa-solid fa-copy"></i></button>
+        </div>
+        <a href="https://www.linkedin.com/in/eric-solsol" target="_blank" rel="noopener" class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between gap-3 hover:border-emerald-500/40 transition-all group">
+          <div class="flex items-center gap-3"><i class="fa-brands fa-linkedin text-blue-400 text-xl"></i>
+          <div><span class="text-xs text-slate-400 block font-mono">Perfil Profesional</span><span class="text-sm text-white font-mono font-medium group-hover:text-emerald-300">LinkedIn / Eric Solsol</span></div></div>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+        </a>
+        <a href="https://github.com/ericsolsol" target="_blank" rel="noopener" class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between gap-3 hover:border-emerald-500/40 transition-all group">
+          <div class="flex items-center gap-3"><i class="fa-brands fa-github text-slate-200 text-xl"></i>
+          <div><span class="text-xs text-slate-400 block font-mono">Repositorio de Código</span><span class="text-sm text-white font-mono font-medium group-hover:text-emerald-300">GitHub / Eric Solsol</span></div></div>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+        </a>
+        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-3">
+          <i class="fa-solid fa-map-location-dot text-emerald-400 text-lg"></i>
+          <div><span class="text-xs text-slate-400 block font-mono">Ubicación</span><span class="text-sm text-white font-mono font-medium">Callao / Lima, Perú</span></div>
+        </div>
+      </div>
+      <button onclick="openCVModal()" class="w-full py-3.5 rounded-xl bg-emerald-500 text-black font-bold font-mono hover:bg-emerald-400 hover:shadow-neon-glow transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-file-arrow-down"></i><span>Abrir CV Completo</span></button>
+    </div>
+
+    <div class="lg:col-span-7 glass-panel p-6 space-y-4">
+      <h3 class="text-xl font-bold text-white">Enviar un mensaje</h3>
+      <form onsubmit="handleContactSubmit(event)" class="space-y-4 pt-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="space-y-1"><label class="text-xs font-mono text-slate-300">Tu Nombre</label><input type="text" required class="input" placeholder="Ej: María López"></div>
+          <div class="space-y-1"><label class="text-xs font-mono text-slate-300">Tu Correo</label><input type="email" required class="input" placeholder="maria@ejemplo.com"></div>
+        </div>
+        <div class="space-y-1"><label class="text-xs font-mono text-slate-300">Asunto</label><input type="text" required class="input" placeholder="Oportunidad laboral / Consulta técnica"></div>
+        <div class="space-y-1"><label class="text-xs font-mono text-slate-300">Mensaje</label><textarea rows="4" required class="input" placeholder="Hola Eric, me gustaría ponerme en contacto contigo para..."></textarea></div>
+        <button type="submit" class="w-full py-3 rounded-lg bg-slate-900 border border-emerald-500/40 text-emerald-400 font-mono font-bold hover:bg-emerald-950 hover:border-emerald-400 transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-paper-plane"></i><span>Enviar Mensaje</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="relative z-10 border-t border-slate-800/80 bg-cyber-dark py-8 mt-20">
+  <div class="max-w-7xl mx-auto px-4 text-center space-y-3 font-mono text-xs text-slate-500">
+    <p>Diseñado & Desarrollado por <span class="text-emerald-400 font-bold">Eric Eli Solsol Fasabi</span> © 2026</p>
+    <p class="text-[11px] text-slate-600">Ingeniería de Sistemas e Informática | Ciberseguridad & Redes | UTP - SENATI</p>
+  </div>
+</footer>
+
+<!-- MODAL DE PROYECTO 1 -->
+<div id="modal-proyecto1" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl max-w-5xl w-full p-6 relative shadow-2xl space-y-4">
+    <button type="button" onclick="closeProjectModal('proyecto1')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl" aria-label="Cerrar">✕</button>
+
+    <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Diagrama de Red</span>
+    <h3 class="text-xl sm:text-2xl font-bold text-white font-mono">Topología Cisco Packet Tracer: Red Minera</h3>
+
+    <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden p-2 flex items-center justify-center">
+      <img src="./certs/img/Red_Minera.png" alt="Topología de Red Redundante" class="w-full h-auto max-h-[500px] object-contain rounded">
+    </div>
+
+    <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+      <span class="text-xs text-slate-400 font-mono">
+        Configuración probada con OSPF, VLANs, STP y Servidores DNS/Web.
+      </span>
+      <div class="flex gap-3">
+        <button type="button" onclick="closeProjectModal('proyecto1')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs rounded-lg">Cerrar</button>
+        <a href="./downloads/Conectividad_redundante_servicios.pkt" download="Conectividad_redundante_servicios.pkt" class="py-2.5 px-5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold font-mono text-xs sm:text-sm rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-lg shadow-emerald-500/20">
+          Descargar .PKT
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CV MODAL -->
+<div id="cvModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+  <div class="glass-panel max-w-2xl w-full p-6 space-y-6 relative border border-emerald-500/50 shadow-neon-glow max-h-[90vh] overflow-y-auto">
+    <button onclick="closeCVModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <div class="space-y-1 border-b border-slate-800 pb-3">
+      <h3 class="text-2xl font-bold text-white">Curriculum Vitae</h3>
+      <p class="text-xs font-mono text-emerald-400">Eric Eli Solsol Fasabi - Resumen Ejecutivo</p>
+    </div>
+    <div class="p-6 bg-slate-950 border border-slate-800 rounded-xl space-y-5 text-sm text-slate-300">
+      <div class="border-b border-slate-800 pb-3 flex justify-between items-start flex-wrap gap-2">
+        <div><h4 class="text-lg font-bold text-white">Eric Eli Solsol Fasabi</h4><p class="text-xs text-emerald-400 font-mono">Ingeniería de Sistemas e Informática</p></div>
+        <span class="text-xs font-mono text-slate-400">Callao / Lima, Perú</span>
+      </div>
+      <div class="space-y-2"><h5 class="text-xs font-mono text-emerald-400 font-bold uppercase">Perfil Profesional</h5>
+        <p class="text-xs leading-relaxed">Estudiante de Ingeniería de Sistemas e Informática (UTP) con formación técnica en redes, virtualización y ciberseguridad, respaldada por certificaciones de Cisco y laboratorios prácticos. Casi tres años de experiencia operativa con SAP ERP en trazabilidad e inventarios. Busca una práctica preprofesional en TI, soporte técnico L1, redes o ciberseguridad.</p></div>
+      <div class="space-y-2"><h5 class="text-xs font-mono text-emerald-400 font-bold uppercase">Educación</h5>
+        <ul class="text-xs space-y-1 list-disc list-inside">
+          <li><strong class="text-white">UTP</strong>: Ingeniería de Sistemas e Informática (2026 – En curso)</li>
+          <li><strong class="text-white">SENATI</strong>: Módulos Técnicos en Ciberseguridad y Redes (2024 – 2026)</li>
+          <li><strong class="text-white">El Americano</strong>: Computación e Informática (2020 – 2022)</li>
+        </ul></div>
+      <div class="space-y-2"><h5 class="text-xs font-mono text-emerald-400 font-bold uppercase">Experiencia</h5>
+        <ul class="text-xs space-y-1 list-disc list-inside">
+          <li><strong class="text-white">Machu Picchu Foods</strong>: Operario de Producción y Auxiliar Documentario (09/2023 – 06/2026). Trazabilidad e inventarios en SAP ERP.</li>
+        </ul></div>
+      <div class="space-y-2"><h5 class="text-xs font-mono text-emerald-400 font-bold uppercase">Certificaciones</h5>
+        <ul id="cvCerts" class="text-xs space-y-1 list-disc list-inside"></ul></div>
+    </div>
+    <div class="flex gap-3 pt-2">
+      <button onclick="closeCVModal()" class="flex-1 py-2.5 rounded-lg bg-slate-900 text-slate-300 font-mono text-xs hover:bg-slate-800">Cerrar</button>
+      <button onclick="downloadCV()" class="flex-1 py-2.5 rounded-lg bg-emerald-500 text-black font-mono text-xs font-bold hover:bg-emerald-400 flex items-center justify-center gap-2"><i class="fa-solid fa-download"></i><span>Descargar PDF</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- VISOR DE CERTIFICADOS -->
+<div id="certModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+  <div class="glass-panel max-w-4xl w-full p-4 sm:p-6 space-y-4 relative border border-emerald-500/50 shadow-neon-glow max-h-[95vh] overflow-y-auto">
+    <button onclick="closeCertModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <div class="space-y-1 pr-8">
+      <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Certificado</span>
+      <h3 id="certTitle" class="text-xl font-bold text-white"></h3>
+    </div>
+    <div class="rounded-lg bg-slate-950 border border-slate-800 p-2 flex justify-center">
+      <img id="certImg" alt="" class="w-auto max-w-full max-h-[62vh] object-contain rounded">
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <button onclick="closeCertModal()" class="flex-1 min-w-[7rem] py-2.5 rounded-lg bg-slate-900 text-slate-300 font-mono text-xs hover:bg-slate-800">Cerrar</button>
+      <a id="certVerify" href="#" target="_blank" rel="noopener" class="hidden flex-1 min-w-[7rem] py-2.5 rounded-lg bg-slate-900 border border-emerald-500/40 text-emerald-400 font-mono text-xs text-center hover:bg-emerald-950 items-center justify-center gap-2"><i class="fa-solid fa-circle-check"></i><span>Verificar credencial</span></a>
+      <a id="certOpen" href="#" target="_blank" rel="noopener" class="flex-1 min-w-[7rem] py-2.5 rounded-lg bg-slate-900 border border-emerald-500/40 text-emerald-400 font-mono text-xs text-center hover:bg-emerald-950 flex items-center justify-center gap-2"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Abrir en pestaña nueva</span></a>
+      <a id="certDownload" href="#" download class="flex-1 min-w-[7rem] py-2.5 rounded-lg bg-emerald-500 text-black font-mono text-xs font-bold hover:bg-emerald-400 flex items-center justify-center gap-2"><i class="fa-solid fa-download"></i><span>Descargar PDF</span></a>
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
