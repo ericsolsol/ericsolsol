@@ -4,20 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eric Eli Solsol Fasabi | Portfolio & CV</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: { extend: {
-    colors: { cyber: { dark: '#050811' } },
-    fontFamily: { sans: ['Inter','sans-serif'], mono: ['JetBrains Mono','monospace'] },
-    boxShadow: { 'neon-glow': '0 0 20px rgba(16,185,129,.35)', 'card-cyber': '0 8px 32px rgba(0,0,0,.37)' }
-  } }
-}
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="tailwind.css">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body class="relative min-h-screen text-slate-200 selection:bg-emerald-500 selection:text-black">
@@ -71,7 +64,7 @@ tailwind.config = {
 <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-28">
 
 <!-- HERO -->
-<section id="about" class="pt-8 sm:pt-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<section id="about" class="pt-0 sm:pt-4 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
   <div class="lg:col-span-7 space-y-6">
     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/30 border border-emerald-500/30 font-mono text-xs text-emerald-300">
       <i class="fa-solid fa-shield-halved text-emerald-400"></i><span>Ciberseguridad & Ingeniería de Sistemas</span>
@@ -109,7 +102,7 @@ tailwind.config = {
         <span class="font-mono text-xs text-slate-400">bash - eric@security-node:~</span>
         <i class="fa-solid fa-lock text-xs text-emerald-500/60"></i>
       </div>
-      <div class="p-5 font-mono text-xs sm:text-sm space-y-4 text-slate-300 bg-slate-950/90 h-96 overflow-y-auto" id="terminalOutput">
+      <div class="p-5 font-mono text-xs sm:text-sm space-y-4 text-slate-300 bg-slate-950/90 min-h-[10rem] max-h-96 overflow-y-auto" id="terminalOutput">
         <p class="text-emerald-400 font-bold"># Bienvenido a la consola interactiva de Eric Solsol</p>
         <p class="text-slate-400">Escribe <span class="text-yellow-400 font-bold">'help'</span> para ver los comandos disponibles.</p>
         <div class="pt-2"><span class="text-emerald-400">eric@solsol:~$</span> <span class="text-white">whoami</span>
@@ -119,7 +112,7 @@ tailwind.config = {
       </div>
       <form onsubmit="handleTerminalSubmit(event)" class="bg-slate-950 border-t border-slate-800 p-3 flex items-center gap-2 font-mono text-xs sm:text-sm">
         <span class="text-emerald-400 font-bold">eric@solsol:~$</span>
-        <input type="text" id="terminalInput" class="flex-1 bg-transparent text-white focus:outline-none placeholder-slate-600" placeholder="Escribe un comando... (ej: help, certs, skills, cv)" autocomplete="off" aria-label="Comando">
+        <input type="text" id="terminalInput" class="flex-1 bg-transparent text-white focus:outline-none placeholder-slate-600" placeholder="Escribe un comando (help, cv)..." autocomplete="off" aria-label="Comando">
         <button type="submit" class="text-xs text-emerald-400 hover:text-emerald-300 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-500/30">Ejecutar</button>
       </form>
     </div>
@@ -333,7 +326,7 @@ tailwind.config = {
     <h3 class="text-xl sm:text-2xl font-bold text-white font-mono">Topología Cisco Packet Tracer: Red Minera</h3>
 
     <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden p-2 flex items-center justify-center">
-      <img src="./certs/img/Red_Minera.png" alt="Topología de Red Redundante" class="w-full h-auto max-h-[500px] object-contain rounded">
+      <img src="./certs/img/Red_Minera.png" loading="lazy" decoding="async" alt="Topología de Red Redundante" class="w-full h-auto max-h-[500px] object-contain rounded">
     </div>
 
     <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
@@ -394,7 +387,7 @@ tailwind.config = {
       <h3 id="certTitle" class="text-xl font-bold text-white"></h3>
     </div>
     <div class="rounded-lg bg-slate-950 border border-slate-800 p-2 flex justify-center">
-      <img id="certImg" alt="" class="w-auto max-w-full max-h-[62vh] object-contain rounded">
+      <img id="certImg" decoding="async" alt="" class="w-auto max-w-full max-h-[62vh] object-contain rounded">
     </div>
     <div class="flex flex-wrap gap-3">
       <button onclick="closeCertModal()" class="flex-1 min-w-[7rem] py-2.5 rounded-lg bg-slate-900 text-slate-300 font-mono text-xs hover:bg-slate-800">Cerrar</button>
@@ -407,6 +400,6 @@ tailwind.config = {
 
 <div id="toastContainer" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 </body>
 </html>

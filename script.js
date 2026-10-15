@@ -29,6 +29,13 @@ courses.forEach(c => {
   c.pdf = c.pdf || 'certs/' + c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.pdf';
 });
 
+// Google Drive: agrega drive: 'ID_DEL_ARCHIVO' a un curso (el ID está en el link, entre /d/ y /view).
+// Si no tiene drive, se usa el PDF local de certs/.
+courses.forEach(c => {
+  c.openUrl = c.drive ? 'https://drive.google.com/file/d/' + c.drive + '/view' : c.pdf;
+  c.downloadUrl = c.drive ? 'https://drive.google.com/uc?export=download&id=' + c.drive : c.pdf;
+});
+
 const skills = [
   ['Redes y Conmutación', 'fa-solid fa-network-wired', 'text-cyan-400', 'Configuración de VLANs, Spanning Tree Protocol (STP) y EtherChannel (LACP) para alta disponibilidad.', 'cyber'],
   ['Enrutamiento Dinámico (OSPF v2/v3)', 'fa-solid fa-route', 'text-sky-400', 'Implementación de OSPF, rutas estáticas y topologías empresariales redundantes.', 'cyber'],
@@ -91,14 +98,15 @@ function beep(freq = 600, dur = .05) {
 }
 
 /* ---------- Fondo Matrix ---------- */
+// En móvil (o con "reducir movimiento") no se anima: es lo que más CPU/GPU consume.
+const lowPower = matchMedia('(max-width: 768px), (pointer: coarse), (prefers-reduced-motion: reduce)').matches;
 const canvas = document.getElementById('cyberCanvas'), ctx = canvas.getContext('2d');
 const chars = '01101001ERIC_SOLSOL_CYBER_UTP_SENATI_CISCO_PYTHON_KALI', fs = 12;
-let drops = [];
+let drops = [], matrixRaf = null, lastFrame = 0;
 function resizeCanvas() {
   canvas.width = innerWidth; canvas.height = innerHeight;
   drops = Array.from({ length: Math.floor(innerWidth / fs) }, () => Math.floor(Math.random() * -100));
 }
-addEventListener('resize', resizeCanvas); resizeCanvas();
 function drawMatrix() {
   ctx.fillStyle = 'rgba(5,8,17,.1)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = '#10B981'; ctx.font = fs + "px 'JetBrains Mono', monospace";
@@ -106,6 +114,24 @@ function drawMatrix() {
     ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fs, d * fs);
     if (d * fs > canvas.height && Math.random() > .975) drops[i] = 0;
     drops[i]++;
+  });
+}
+function matrixLoop(t) {
+  matrixRaf = requestAnimationFrame(matrixLoop);
+  if (t - lastFrame < 40) return; // ~25 FPS
+  lastFrame = t; drawMatrix();
+}
+function startMatrix() {
+  if (lowPower) {
+    canvas.style.display = 'none';
+    const sl = document.querySelector('.scanline-overlay'); if (sl) sl.style.display = 'none';
+    return;
+  }
+  resizeCanvas(); addEventListener('resize', resizeCanvas);
+  matrixRaf = requestAnimationFrame(matrixLoop);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(matrixRaf);
+    else matrixRaf = requestAnimationFrame(matrixLoop);
   });
 }
 
@@ -155,10 +181,12 @@ function filterSkills(cat, btn) {
 /* ---------- Modal CV, contacto, toasts ---------- */
 function openCVModal() { beep(850, .05); const m = document.getElementById('cvModal'); m.classList.remove('hidden'); m.classList.add('flex'); }
 function closeCVModal() { const m = document.getElementById('cvModal'); m.classList.add('hidden'); m.classList.remove('flex'); }
+// Pega aquí el ID de Drive del CV (entre /d/ y /view). Vacío = usa cv/CV_Eric_Solsol_Practicante_TI.pdf
+const CV_DRIVE_ID = '';
 function downloadCV() {
   beep(1000, .08);
   const a = document.createElement('a');
-  a.href = 'cv/CV_Eric_Solsol_Practicante_TI.pdf';
+  a.href = CV_DRIVE_ID ? 'https://drive.google.com/uc?export=download&id=' + CV_DRIVE_ID : 'cv/CV_Eric_Solsol_Practicante_TI.pdf';
   a.download = 'CV_Eric_Solsol_Practicante_TI.pdf';
   document.body.appendChild(a); a.click(); a.remove();
   showToast('Descargando CV...', 'success'); closeCVModal();
@@ -173,8 +201,8 @@ function viewCert(i) {
   document.getElementById('certTitle').innerText = c.name;
   const img = document.getElementById('certImg');
   img.src = c.img; img.alt = 'Certificado de ' + c.name;
-  document.getElementById('certOpen').href = c.pdf;
-  document.getElementById('certDownload').href = c.pdf;
+  document.getElementById('certOpen').href = c.openUrl;
+  document.getElementById('certDownload').href = c.downloadUrl;
   const v = document.getElementById('certVerify');
   if (c.verify) { v.href = c.verify; v.classList.remove('hidden'); v.classList.add('flex'); }
   else { v.classList.add('hidden'); v.classList.remove('flex'); }
@@ -200,13 +228,13 @@ function showToast(msg, type = 'info') {
 
 /* ---------- Inicio ---------- */
 window.onload = function () {
-  setInterval(drawMatrix, 40);
+  startMatrix();
   const titles = ['Estudiante de Ingeniería de Sistemas e Informática', 'Especialista en Ciberseguridad & Redes Cisco (CCNA)', 'Automatización de procesos con Python', 'Despliegue de Entornos Virtualizados'];
   let ti = 0, ci = 0, del = false;
   const el = document.getElementById('typedTitle');
   (function loop() {
     const cur = titles[ti];
-    el.innerText = cur.substring(0, del ? --ci : ++ci);
+    el.textContent = cur.substring(0, del ? --ci : ++ci);
     if (!del && ci === cur.length) { del = true; setTimeout(loop, 2000); }
     else if (del && ci === 0) { del = false; ti = (ti + 1) % titles.length; setTimeout(loop, 500); }
     else setTimeout(loop, del ? 30 : 60);

@@ -16,3 +16,9 @@ body{background:#050811;color:#E2E8F0;overflow-x:hidden;font-family:'Inter',sans
 .input:focus{outline:none;border-color:#10B981}
 .chip{font-size:.75rem;font-family:'JetBrains Mono',monospace;padding:.25rem .625rem;border-radius:.25rem;background:#0f172a;color:#cbd5e1;border:1px solid #1e293b}
 @media (prefers-reduced-motion:reduce){#cyberCanvas{display:none}}
+/* Rendimiento en móvil: sin blur ni capas animadas a pantalla completa */
+@media (max-width:768px){
+  .glass-panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(15,23,42,.92)}
+  header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(5,8,17,.97)!important}
+  #cyberCanvas,.scanline-overlay{display:none}
+}
