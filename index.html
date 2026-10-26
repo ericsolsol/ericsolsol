@@ -228,13 +228,61 @@
           <span>Servidores virtualizados integrados: DNS, Web y DHCP dinámico.</span>
         </li>
       </ul>
+<!-- Cierre correcto del Proyecto 1 -->
+        <div class="flex flex-wrap gap-2 pt-2">
+          <span class="chip">OSPF</span>
+          <span class="chip">VLANs</span>
+          <span class="chip">EtherChannel</span>
+          <span class="chip">IPv4 / IPv6</span>
+        </div>
+      </div>
 
-      <div class="flex flex-wrap gap-2">
-        <span class="chip">OSPF</span>
-        <span class="chip">VLANs</span>
-        <span class="chip">EtherChannel</span>
-        <span class="chip">IPv4 / IPv6</span>
-        <span class="chip">VMware</span>
+      <!-- PROYECTO 2: py-sentinel-soc -->
+      <div class="glass-panel p-6 sm:p-8 space-y-6 border-l-4 border-l-emerald-500 rounded-xl relative overflow-hidden group">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <span class="px-3 py-1 text-xs font-mono font-semibold text-emerald-400 bg-emerald-950/80 border border-emerald-500/30 rounded-full">
+            Ciberseguridad & SOC
+          </span>
+          <span class="text-xs text-slate-400 font-mono">Python 3 / Linux (iptables)</span>
+        </div>
+
+        <div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-3">
+            🛡️ py-sentinel-soc — Sistema HIDS/IPS Ligero
+          </h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Motor defensivo automatizado para la detección y mitigación de ataques de fuerza bruta SSH en tiempo real. 
+            Analiza eventos mediante <strong class="text-emerald-400 font-normal">Regex</strong> y correlación en ventana temporal (30s), aplicando reglas dinámicas en <strong class="text-emerald-400 font-normal">iptables</strong> y generando telemetría estructurada en JSON.
+          </p>
+        </div>
+
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm text-slate-300 font-mono bg-slate-950/50 p-4 rounded-lg border border-slate-800">
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-400 font-bold">></span>
+            <span>Parseo de logs de autenticación mediante Regex optimizado.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-400 font-bold">></span>
+            <span>Motor de ventana de tiempo (30s) para prevención de falsos positivos.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-400 font-bold">></span>
+            <span>Bloqueo activo en iptables y exportación de telemetría JSON SIEM.</span>
+          </li>
+        </ul>
+
+        <div class="flex items-center justify-between pt-2">
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Python</span>
+            <span class="chip">Linux</span>
+            <span class="chip">Regex</span>
+            <span class="chip">iptables</span>
+            <span class="chip">JSON / SIEM</span>
+          </div>
+          <a href="https://github.com/ericsolsol/py-sentinel-soc" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-emerald-400 hover:text-emerald-300 transition-colors">
+            <i class="fa-brands fa-github text-base"></i> Ver Repositorio &rarr;
+          </a>
+        </div>
       </div>
 
       <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-800">
