@@ -229,14 +229,15 @@ function showToast(msg, type = 'info') {
 /* ---------- Inicio ---------- */
 window.onload = function () {
   startMatrix();
-  const titles = ['Estudiante de Ingeniería de Sistemas e Informática', 'Especialista en Ciberseguridad & Redes Cisco (CCNA)', 'Automatización de procesos con Python', 'Despliegue de Entornos Virtualizados'];
+  const titles = ['Estudiante de Ingeniería de Sistemas', 'Ciberseguridad & Redes Cisco (CCNA)', 'Automatización con Python', 'Despliegue de Entornos Virtualizados'];
   let ti = 0, ci = 0, del = false;
   const el = document.getElementById('typedTitle');
   (function loop() {
-    const cur = titles[ti];
-    el.textContent = cur.substring(0, del ? --ci : ++ci);
-    if (!del && ci === cur.length) { del = true; setTimeout(loop, 2000); }
-    else if (del && ci === 0) { del = false; ti = (ti + 1) % titles.length; setTimeout(loop, 500); }
-    else setTimeout(loop, del ? 30 : 60);
-  })();
+      const cur = titles[ti];
+      if (ci > cur.length) ci = cur.length; // Evita que el cursor se desplace más allá del texto
+      el.textContent = cur.substring(0, del ? --ci : ++ci);
+      if (!del && ci === cur.length) { del = true; setTimeout(loop, 2000); }
+      else if (del && ci === 0) { del = false; ti = (ti + 1) % titles.length; setTimeout(loop, 500); }
+      else setTimeout(loop, del ? 30 : 60);
+    })();
 };
